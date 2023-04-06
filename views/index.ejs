@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Node.js App</title>
+    <link rel="stylesheet" href="/css/variables.css">
+    <link rel="stylesheet" href="/css/global.css">
+    <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
+    <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+
+    <script type="module" src="config.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Welcome to the Node.js Demo App</h1>
+      <p>This is the homepage of the Node.js app.</p>
+      <p>You can log in or register to access the app.</p>
+      <ul>
+        <li><a href="/login">Login with Email</a></li>
+        <li><a href="/register">Register with Email</a></li>
+        </li>
+      </ul>
+      <script src="https://accounts.google.com/gsi/client" async defer></script>
+      <script type="module">
+
+        import { GoogleAuthProvider,signInWithCredential,getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js'
+
+        function handleCredentialResponse(response) {
+
+            // Build Firebase credential with the Google ID token.
+
+            const idToken = response.credential;
+            const credential = GoogleAuthProvider.credential(idToken);
+
+            console.log("credential", credential);
+
+            // Sign in with credential from the Google user.
+            const auth = getAuth();
+
+            console.log(auth.currentUser );
+
+            signInWithCredential(auth, credential).catch((error) => {
+              // Handle Errors here.
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              // The email of the user's account used.
+              const email = error.email;
+              // The credential that was used.
+              const credential = GoogleAuthProvider.credentialFromError(error);
+              // ...
+            });
+
+            onAuthStateChanged(auth, (user) => {
+              if (user) {
+                // User is signed in, see docs for a list of available properties
+                // https://firebase.google.com/docs/reference/js/firebase.User
+                const uid = user.uid;
+                console.log("uid", user.uid);
+                const email = user.email;
+                console.log("email", email);
+
+                window.location = "profile";
+
+                // ...
+              } else {
+                // User is signed out
+                // ...
+              }
+            });
+
+        }
+        
+        window.onload = function () {
+
+          google.accounts.id.initialize({
+            client_id: "302884190983-t3b8rj7q5qqvvtecm564a8om3ak7j11m.apps.googleusercontent.com",
+            callback: handleCredentialResponse
+
+          });
+          google.accounts.id.renderButton(
+            document.getElementById("buttonDiv"),
+            { theme: "outline", size: "large" }  // customization attributes
+          );
+          google.accounts.id.prompt(); // also display the One Tap dialog
+
+          const auth = getAuth();
+
+          onAuthStateChanged(auth, (user) => {
+              if (user) {
+                // User is signed in, see docs for a list of available properties
+                // https://firebase.google.com/docs/reference/js/firebase.User
+                const uid = user.uid;
+                console.log("Logged In User UID:", user.uid);
+                const email = user.email;
+                console.log("Logged In User Email:", email);
+
+                // ...
+              } else {
+                // User is signed out
+                // ...
+              }
+            });
+
+        }
+    </script>
+    <div id="buttonDiv"></div> 
+    </main>
+    <footer>
+      <p>Disclaimer: This app is for demo purposes only.</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Register with Email</title>
+    <link rel="stylesheet" href="/css/register.css">
+    <link rel="stylesheet" href="/css/variables.css">
+    <link rel="stylesheet" href="/css/global.css">
+    <script type="module" src="config.js"></script>
+  </head>
+  <body>
+    <h1>Register with Email</h1>
+    <% if (message) { %>
+      <p><%= message %></p>
+    <% } %>
+    <form action="/register" method="POST">
+      <label for="displayName">Name:</label>
+      <input type="text" id="displayName" name="displayName" required><br><br>
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="email"><br><br>
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password"><br><br>
+      <input type="submit" value="Register">
+    </form>
+  </body>
+</html>

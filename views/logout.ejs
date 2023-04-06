@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Logout</title>
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/global.css">
+  <script type="module" src="config.js"></script>
+</head>
+
+<body>
+
+  <script type="module">
+    import { GoogleAuthProvider, signInWithCredential, getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js'
+
+    window.onload = function () {
+
+      const auth = getAuth();
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          // User is signed in, see docs for a list of available properties
+          // https://firebase.google.com/docs/reference/js/firebase.User
+          const uid = user.uid;
+          console.log("uid", user.uid);
+          const email = user.email;
+          console.log("email", email);
+          const displayName = user.displayName;
+          console.log("displayName", displayName);
+
+
+          auth.signOut()
+            .then(() => {
+              console.log('User signed out');
+            })
+            .catch(error => {
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              console.error('Error signing out user:', errorCode, errorMessage);
+              window.location.replace("/");
+            });
+        } else {
+          // User is signed out
+          // ...
+        }
+      });
+    };
+
+  </script>
+  <h1>Logout</h1>
+  <p>You have been logged out.</p>
+  <ul>
+    <li><a href="/">Return to Home</a></li>
+  </ul>
+</body>
+
+</html>

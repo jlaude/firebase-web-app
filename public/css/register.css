@@ -1,0 +1,72 @@
+/* css/register.css */
+
+/* Import variables and global styles */
+@import url("/css/variables.css");
+@import url("/css/global.css");
+
+/* Center the form */
+form {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Adjust input box size */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border-radius: 4px;
+  border: none;
+}
+
+/* Style the register button */
+input[type="submit"] {
+  background-color: #4285f4;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+  background-color: #3367d6;
+}
+
+
+/* public/css/register.css */
+.register-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+  }
+  
+  .btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .btn-google {
+    background-color: #fff;
+    border: 2px solid #ddd;
+    color: #555;
+    padding: 8px 16px;
+    font-size: 16px;
+    margin-left: 16px;
+    text-decoration: none;
+  }
+  
+  .btn-google:hover {
+    background-color: #ddd;
+  }
+  
