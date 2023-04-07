@@ -1,14 +1,5 @@
 const config = {};
 
-// config.FIREBASEAPIKEY="AIzaSyCWluCW71rZF56veVt-uz3j9rUH0yZorxU";
-// config.FIREBASEAUTHDOMAIN="jlaude-labs-dev.firebaseapp.com";
-// config.FIREBASEPROJECTID="jlaude-labs-dev";
-// config.FIREBASESTORAGEBUCKET="jlaude-labs-dev.appspot.com";
-// config.FIREBASEMESSAGINGSENDERID="302884190983";
-// config.FIREBASEAPPID="1:302884190983:web:97023b3d94d216bd2263a2";
-// config.FIREBASEMEASUREMENTID="G-86B7N73E0Z";
-// config.GOOGLEOAUTHCLIENTID="302884190983-t3b8rj7q5qqvvtecm564a8om3ak7j11m.apps.googleusercontent.com";
-
 config.FIREBASEAPIKEY=FIREBASE_API_KEY;
 config.FIREBASEAUTHDOMAIN=FIREBASE_AUTH_DOMAIN;
 config.FIREBASEPROJECTID=FIREBASE_PROJECT_ID;
