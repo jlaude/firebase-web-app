@@ -1,13 +1,15 @@
 import { initializeApp } from "firebase/app";
+import dotenv from "dotenv"
+dotenv.config();
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCWluCW71rZF56veVt-uz3j9rUH0yZorxU",
-    authDomain: "jlaude-labs-dev.firebaseapp.com",
-    projectId: "jlaude-labs-dev",
-    storageBucket: "jlaude-labs-dev.appspot.com",
-    messagingSenderId: "302884190983",
-    appId: "1:302884190983:web:97023b3d94d216bd2263a2",
-    measurementId: "G-86B7N73E0Z"
+  apiKey: process.env.FIREBASEAPIKEY,
+  authDomain: process.env.FIREBASEAUTHDOMAIN,
+  projectId: process.env.FIREBASEPROJECTID,
+  storageBucket: process.env.FIREBASESTORAGEBUCKET,
+  messagingSenderId: process.env.FIREBASEMESSAGINGSENDERID,
+  appId: process.env.FIREBASEAPPID,
+  measurementId: process.env.FIREBASEMEASUREMENTID
   };
   
 function inializeFirebase() {

@@ -3,13 +3,16 @@
 
 // Add the Firebase products that you want to use
 import "body-parser";
-import {tokenSignin} from "./src/tokensignin.js";
-import {emailLogin, emailRegister} from "./src/email_login.js";
+import {tokenSignin} from "./tokensignin.js";
+import {emailLogin, emailRegister} from "./email_login.js";
 import pkg from 'compression';
 const compression = pkg;
 
 import express from "express";
 import bodyParser from "body-parser";
+
+import dotenv from "dotenv"
+dotenv.config();
 
 const app = express();
 const port = 8080;
@@ -20,6 +23,7 @@ app.use(bodyParser.json());
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public'));
+app.use(express.static('config'));
 
 // Set up routes
 app.get('/', (req, res) => {

@@ -9,6 +9,8 @@ RUN npm install
 COPY . .
 
 EXPOSE 8080
-
-CMD [ "node", "app.js" ]
+RUN chmod +x ./startup.sh
+#CMD ["/bin/sh -c ./startup.sh"]
+#CMD "echo test cmd"
+ENTRYPOINT [ "./startup.sh" ]
 

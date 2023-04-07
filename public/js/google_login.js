@@ -1,5 +1,5 @@
-
-import { GoogleAuthProvider, signInWithCredential, getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js'
+import { GoogleAuthProvider, signInWithCredential, getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js';
+import {config} from "./config.js";
 
 function handleCredentialResponse(response) {
 
@@ -8,12 +8,8 @@ function handleCredentialResponse(response) {
   const idToken = response.credential;
   const credential = GoogleAuthProvider.credential(idToken);
 
-  console.log("credential", credential);
-
   // Sign in with credential from the Google user.
   const auth = getAuth();
-
-  console.log(auth.currentUser);
 
   signInWithCredential(auth, credential).catch((error) => {
     // Handle Errors here.
@@ -30,10 +26,10 @@ function handleCredentialResponse(response) {
     if (user) {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
-      const uid = user.uid;
-      console.log("uid", user.uid);
-      const email = user.email;
-      console.log("email", email);
+      // const uid = user.uid;
+      // console.log("uid", user.uid);
+      // const email = user.email;
+      // console.log("email", email);
 
       var xhr = new XMLHttpRequest();
       xhr.open('POST', '/tokensignin');
@@ -57,7 +53,7 @@ function handleCredentialResponse(response) {
 window.onload = function () {
 
   google.accounts.id.initialize({
-    client_id: "302884190983-t3b8rj7q5qqvvtecm564a8om3ak7j11m.apps.googleusercontent.com",
+    client_id: config.GOOGLEOAUTHCLIENTID,
     callback: handleCredentialResponse
 
   });

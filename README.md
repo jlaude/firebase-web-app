@@ -31,12 +31,12 @@ npm install
 
 5. Set the environment variables:
 
-- Update the firebaseConfig variables in  public/config.js and app.js with the configuration values from your Firebase project.
-- Update the clientId with your OauthId Client Id.
+- copy startup.sh.example to startup.sh
+- update the sed commands with the variables applicable to your firebase project
 
 6. Build and run the Docker container:
 
-docker build -t firebase-web-app
+docker build -t firebase-web-app .
 docker run firebase-web-app
 
 7. Open the app in your web browser:

@@ -1,18 +1,21 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
+const config = {};
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+// config.FIREBASEAPIKEY="AIzaSyCWluCW71rZF56veVt-uz3j9rUH0yZorxU";
+// config.FIREBASEAUTHDOMAIN="jlaude-labs-dev.firebaseapp.com";
+// config.FIREBASEPROJECTID="jlaude-labs-dev";
+// config.FIREBASESTORAGEBUCKET="jlaude-labs-dev.appspot.com";
+// config.FIREBASEMESSAGINGSENDERID="302884190983";
+// config.FIREBASEAPPID="1:302884190983:web:97023b3d94d216bd2263a2";
+// config.FIREBASEMEASUREMENTID="G-86B7N73E0Z";
+// config.GOOGLEOAUTHCLIENTID="302884190983-t3b8rj7q5qqvvtecm564a8om3ak7j11m.apps.googleusercontent.com";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyCWluCW71rZF56veVt-uz3j9rUH0yZorxU",
-  authDomain: "jlaude-labs-dev.firebaseapp.com",
-  projectId: "jlaude-labs-dev",
-  storageBucket: "jlaude-labs-dev.appspot.com",
-  messagingSenderId: "302884190983",
-  appId: "1:302884190983:web:97023b3d94d216bd2263a2",
-  measurementId: "G-86B7N73E0Z"
-};
+config.FIREBASEAPIKEY=FIREBASE_API_KEY;
+config.FIREBASEAUTHDOMAIN=FIREBASE_AUTH_DOMAIN;
+config.FIREBASEPROJECTID=FIREBASE_PROJECT_ID;
+config.FIREBASESTORAGEBUCKET=FIREBASE_STORAGE_BUCKET;
+config.FIREBASEMESSAGINGSENDERID=FIREBASE_MESSAGING_SENDER_ID;
+config.FIREBASEAPPID=FIREBASE_APPID;
+config.FIREBASEMEASUREMENTID=FIREBASE_MEASUREMENT_ID;
+config.GOOGLEOAUTHCLIENTID=GOOGLE_OAUTH_CLIENT_ID;
 
-initializeApp(firebaseConfig);
+export {config};
