@@ -1,5 +1,7 @@
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import { inializeFirebase } from "./inialize_firebase.js";
 
+inializeFirebase();
 
 function emailLogin(req,res) {
 
