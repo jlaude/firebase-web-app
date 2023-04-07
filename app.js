@@ -3,8 +3,10 @@
 
 // Add the Firebase products that you want to use
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, signOut, onAuthStateChanged } from "firebase/auth";
-
 import { initializeApp } from "firebase/app";
+import "body-parser";
+import {tokenSignin} from "./tokensignin.js";
+import {emailLogin, emailRegister} from "./email_login.js";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -25,14 +27,13 @@ initializeApp(firebaseConfig);
 
 
 import express from "express";
+import bodyParser from "body-parser";
 
 const app = express();
-
-app.set('view engine', 'ejs');
 const port = 8080;
 
-// Initialize the FirebaseUI Widget using Firebase.
-//var ui = new firebaseui.auth.AuthUI(firebase.auth());
+app.use(bodyParser.json());
+app.set('view engine', 'ejs');
 
 
 // Set up middleware
@@ -51,20 +52,7 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-  const { email, password } = req.body;
-  const authz = getAuth();
-  signInWithEmailAndPassword(authz, email, password)
-    .then(userCredential => {
-      const user = userCredential.user;
-      console.log('User signed in:', user);
-      res.redirect('/profile');
-    })
-    .catch(error => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.error('Error signing in:', errorCode, errorMessage);
-      res.render('login', { message: errorMessage });
-    });
+  emailLogin(req,res);
 });
 
 // Handle user registration with email
@@ -73,41 +61,21 @@ app.get('/register', (req, res) => {
 });
 
 app.post('/register', (req, res) => {
-  const { email, password, displayName } = req.body;
-  const authz = getAuth();
-
-  createUserWithEmailAndPassword(authz, email, password)
-    .then(userCredential => {
-      const user = userCredential.user;
-
-      updateProfile(authz.currentUser, {
-        displayName: displayName
-      });
-      console.log('User registered:', user);
-      const message = 'Registration successful! Please log in.';
-
-      res.redirect('/login');
-    })
-    .catch(error => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.error('Error registering user:', errorCode, errorMessage);
-      res.render('register', { message: errorMessage });
-    });
+  emailRegister(req,res);
 });
 
-
 // Handle user logout
-
 app.get('/logout', (req, res) => {
   res.render('logout')
 });
 
 // Render user profile page
 app.get('/profile', (req, res) => {
-
   res.render('profile');
+});
 
+app.post('/tokensignin', (req, res, next) => {
+    tokenSignin(req,res);
 });
 
 // Start server
