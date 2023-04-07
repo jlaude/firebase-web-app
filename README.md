@@ -29,15 +29,22 @@ npm install
 - In the project settings, add a new web app and copy the configuration values.
 - Enable Google authentication in the Firebase Authentication section of the console and add the appropriate redirect URLs.
 
-5. Set the environment variables:
-
-- copy startup.sh.example to startup.sh
-- update the sed commands with the variables applicable to your firebase project
-
-6. Build and run the Docker container:
+5. Build the Docker container:
 
 docker build -t firebase-web-app .
-docker run firebase-web-app
+
+6. Run the docker container:
+
+Pass the following environment variables to your conatiner when running:
+
+FIREBASE_API_KEY
+FIREBASE_AUTH_DOMAIN
+FIREBASE_PROJECT_ID
+FIREBASE_STORAGE_BUCKET
+FIREBASE_MESSAGING_SENDER_ID
+FIREBASE_APPID
+FIREBASE_MEASUREMENT_ID
+GOOGLE_OAUTH_CLIENT_ID
 
 7. Open the app in your web browser:
 
