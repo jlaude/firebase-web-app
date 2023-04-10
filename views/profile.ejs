@@ -3,6 +3,7 @@
 
 <head>
   <title>Profile</title>
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="stylesheet" href="/css/variables.css">
   <link rel="stylesheet" href="/css/global.css">
   <script type="module" src="/js/firebase.js"></script>
@@ -10,26 +11,10 @@
 
 <body>
 
-  <h1>Profile</h1>
-
-  <div class="menu">
-    <p>Welcome, </p>
-    <p id="displayName"></p>
-    <p>Your email address is </p>
-    <p id="email"></p>
-    <ul>
-      <li><a href="/logout">Logout</a></li>
-    </ul>
-  </div>
-
-
-
   <script type="module">
     import { GoogleAuthProvider, signInWithCredential, getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js'
 
     window.onload = function () {
-
-
 
       const auth = getAuth();
       const user = auth.currentUser;
@@ -51,6 +36,9 @@
 
           // ...
         } else {
+
+          window.location.replace("/");
+
           // User is signed out
           // ...
         }
@@ -59,6 +47,18 @@
     };
   </script>
 
+
+  <h1>Profile</h1>
+
+  <div class="menu">
+    <p>Welcome, </p>
+    <p id="displayName"></p>
+    <p>Your email address is </p>
+    <p id="email"></p>
+    <ul>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+  </div>
 
 </body>
 

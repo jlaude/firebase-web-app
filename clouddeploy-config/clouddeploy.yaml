@@ -1,0 +1,50 @@
+apiVersion: deploy.cloud.google.com/v1
+kind: DeliveryPipeline
+metadata:
+  name: firebase-web-app
+description: Firebase Web App Delivery Pipeline
+serialPipeline:
+  stages:
+  - targetId: firebase-web-app-dev
+    profiles: [dev]
+  - targetId: firebase-web-app-prod
+    profiles: [prod]
+    strategy:
+      canary:
+        runtimeConfig:
+          cloudRun:
+            automaticTrafficControl: true
+        canaryDeployment:
+          percentages: [25]
+          verify: false    
+---
+
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+  name: firebase-web-app-dev
+description: Cloud Run development service
+run:
+  location: projects/jlaude-labs-dev/locations/us-central1
+executionConfigs:
+- usages:
+  - RENDER
+  - DEPLOY
+  workerPool: projects/dev-demo-project-366116/locations/us-central1/workerPools/cicd-gke-private-pool-us-central1
+  serviceAccount: cloud-deploy-dev-sa@dev-demo-project-366116.iam.gserviceaccount.com
+
+---
+
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+  name: firebase-web-app-prod
+description: Cloud Run production service
+run:
+  location: projects/jlaude-labs-prod/locations/us-central1
+executionConfigs:
+- usages:
+  - RENDER
+  - DEPLOY
+  workerPool: projects/dev-demo-project-366116/locations/us-central1/workerPools/cicd-gke-private-pool-us-central1
+  serviceAccount: cloud-deploy-prod-sa@dev-demo-project-366116.iam.gserviceaccount.com

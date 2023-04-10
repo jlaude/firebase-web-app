@@ -1,0 +1,28 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: firebase-web-app-prod
+spec:
+  template:
+    spec:
+      containers:
+      - image: us-central1-docker.pkg.dev/dev-demo-project-366116/firebase-web-app/firebase-web-app@sha256:eb83eb3657e3fde248f265a3429223e4b55440e39fc736f7baf62d1b52603190
+        ports:
+        - containerPort: 8080
+        env: 
+        - name: "FIREBASE_API_KEY"
+          value: "\"AIzaSyCsgSNohyJtlHvq_7TrVbGvurHWZ4SSyik\""
+        - name: "FIREBASE_AUTH_DOMAIN"
+          value: "\"jlaude-labs-prod.firebaseapp.com\""
+        - name: "FIREBASE_PROJECT_ID"
+          value: "\"jlaude-labs-prod\""
+        - name: "FIREBASE_STORAGE_BUCKET"
+          value: "\"jlaude-labs-prod.appspot.com\""
+        - name: "FIREBASE_MESSAGING_SENDER_ID"
+          value: "\"357934786326\""
+        - name: "FIREBASE_APPID"
+          value: "\"1:357934786326:web:7877a26775619a35d69237\""
+        - name: "FIREBASE_MEASUREMENT_ID"
+          value: "\"G-ZLJDRMC1VR\""
+        - name: "GOOGLE_OAUTH_CLIENT_ID"
+          value: "\"357934786326-00o6foe2fif5ht4t386m18fqh3g4h7bl.apps.googleusercontent.com\""

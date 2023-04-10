@@ -1,0 +1,15 @@
+apiVersion: skaffold/v3alpha1
+kind: Config
+metadata: 
+  name: firebase-web-app
+profiles:
+- name: dev
+  manifests:
+    rawYaml:
+    - firebase-web-app-dev.yaml
+- name: prod
+  manifests:
+    rawYaml:
+    - firebase-web-app-prod.yaml
+deploy:
+  cloudrun: {}
