@@ -6,9 +6,10 @@ spec:
   template:
     spec:
       containers:
-      - image: us-central1-docker.pkg.dev/dev-demo-project-366116/firebase-web-app/firebase-web-app@sha256:eb83eb3657e3fde248f265a3429223e4b55440e39fc736f7baf62d1b52603190
+      - image: firebase-web-app
         ports:
         - containerPort: 8080
+          name: http1
         env: 
         - name: "FIREBASE_API_KEY"
           value: "\"AIzaSyCWluCW71rZF56veVt-uz3j9rUH0yZorxU\""

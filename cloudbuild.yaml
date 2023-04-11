@@ -1,0 +1,27 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', '$_FIREBASE_WEB_IMAGE:$SHORT_SHA', '.' ]
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', '$_FIREBASE_WEB_IMAGE:$SHORT_SHA']
+- id: "Create Cloud Deploy Release"
+  name: "gcr.io/cloud-builders/gcloud:latest"
+  entrypoint: /bin/bash
+  args:
+    - "-xe"
+    - "-c"
+    - |
+      gcloud deploy releases create firebase-web-app-release-${SHORT_SHA} \
+        --region $_REGION \
+        --delivery-pipeline=firebase-web-app \
+        --skaffold-file=./clouddeploy-config/skaffold.yaml \
+        --images=firebase-web-app=$_FIREBASE_WEB_IMAGE:${SHORT_SHA} \
+        --annotations "commitId=${REVISION_ID}, githubCommit=http://www.github.com/jlaude/firebase-web-app/commit/${REVISION_ID}"
+
+images: ['$_FIREBASE_WEB_IMAGE']
+
+substitutions:
+  _FIREBASE_WEB_IMAGE: 'us-central1-docker.pkg.dev/dev-demo-project-366116/firebase-web-app/firebase-web-app'
+  _REGION: us-central1
+options:
+  dynamic_substitutions: true
+  requestedVerifyOption: VERIFIED
