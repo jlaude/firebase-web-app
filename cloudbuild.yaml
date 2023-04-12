@@ -1,7 +1,9 @@
 steps:
-- name: 'gcr.io/cloud-builders/docker'
+- id: "Bulid Docker Image"
+  name: 'gcr.io/cloud-builders/docker'
   args: [ 'build', '-t', '$_FIREBASE_WEB_IMAGE:$SHORT_SHA', '.' ]
-- name: 'gcr.io/cloud-builders/docker'
+- id: "Push Docker Image"
+  name: 'gcr.io/cloud-builders/docker'
   args: ['push', '$_FIREBASE_WEB_IMAGE:$SHORT_SHA']
 - id: "Create Cloud Deploy Release"
   name: "gcr.io/cloud-builders/gcloud:latest"
