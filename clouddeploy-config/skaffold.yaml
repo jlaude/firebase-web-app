@@ -13,3 +13,10 @@ profiles:
     - firebase-web-app-prod.yaml
 deploy:
   cloudrun: {}
+verify:
+- name: verify-endpoint-test
+  container:
+    name: alpine
+    image: alpine
+    command: ["/bin/sh"]
+    args: ["-c", "wget $CLOUD_RUN_SERVICE_URLS"]

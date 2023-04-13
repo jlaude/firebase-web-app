@@ -7,6 +7,9 @@ serialPipeline:
   stages:
   - targetId: firebase-web-app-dev
     profiles: [dev]
+    strategy:
+      standard:
+        verify: true
   - targetId: firebase-web-app-prod
     profiles: [prod]
     strategy:
@@ -30,6 +33,7 @@ executionConfigs:
 - usages:
   - RENDER
   - DEPLOY
+  - VERIFY
   workerPool: projects/dev-demo-project-366116/locations/us-central1/workerPools/cicd-gke-private-pool-us-central1
   serviceAccount: cloud-deploy-dev-sa@dev-demo-project-366116.iam.gserviceaccount.com
 
