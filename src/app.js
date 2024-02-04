@@ -6,6 +6,7 @@ import "body-parser";
 import {tokenSignin} from "./tokensignin.js";
 import {emailLogin, emailRegister} from "./email_login.js";
 import pkg from 'compression';
+import {createAssessment} from "./createRecaptchaAssessment.js";
 const compression = pkg;
 
 import express from "express";
@@ -61,6 +62,13 @@ app.get('/profile', (req, res) => {
 app.post('/tokensignin', (req, res, next) => {
     tokenSignin(req,res);
 });
+/*
+app.post('/createRecaptchaAssessment', (req,res) => {
+    console.log("recaptcha token" + req.body.recaptchaAssessment);
+    //createAssessment(token=req.body.recaptchaAssessment);
+    
+}); 
+*/
 
 // Start server
 app.listen(port, () => {

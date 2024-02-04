@@ -7,9 +7,26 @@
   <link rel="stylesheet" href="/css/variables.css">
   <link rel="stylesheet" href="/css/global.css">
   <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
-
+  <script src="https://www.google.com/recaptcha/enterprise.js?render=6Lcgk2MpAAAAAMxdw1R_ys0iw_dTd3NOL_lDwyCY"></script>
   <script type="module" src="/js/firebase.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script>
+  function recaptchaFunc() {
+    console.log("onclick function");
+      grecaptcha.enterprise.ready(async () => {
+        const token = await grecaptcha.enterprise.execute('6Lcgk2MpAAAAAMxdw1R_ys0iw_dTd3NOL_lDwyCY', {action: 'LOGIN'});
+        console.log("recaptcha token: " + token);
+       // var xhr = new XMLHttpRequest();
+       // xhr.open('POST', '/createRecaptchaAssessment');
+       // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+       // xhr.send('recaptchaAssessment=' + token);
+      });
+
+
+    //window.location.href = "/register";
+  }
+  </script>
 
 </head>
 
@@ -18,8 +35,13 @@
     <h1>GCP Demo</h1>
     <p>You can log in with email/password or use your Google login to access the app.</p>
     <ul>
-      <li><a href="/login">Login with Email</a></li>
-      <li><a href="/register">Register with Email</a></li>
+
+      <li>
+        <a href="/login">Login with Email</a>
+      </li>
+      <li>
+        <!-- <a href="javascript:recaptchaFunc();">Register with Email</a> -->
+
       </li>
     </ul>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
