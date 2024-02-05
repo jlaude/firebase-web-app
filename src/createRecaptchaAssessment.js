@@ -1,4 +1,4 @@
-import RecaptchaEnterpriseServiceClient from '@google-cloud/recaptcha-enterprise';
+import {RecaptchaEnterpriseServiceClient} from "@google-cloud/recaptcha-enterprise";
 
 /**
   * Create an assessment to analyze the risk of a UI action.
@@ -56,3 +56,5 @@ async function createAssessment({
     return null;
   }
 }
+
+export {createAssessment};

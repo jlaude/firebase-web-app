@@ -13,6 +13,7 @@ import express from "express";
 import bodyParser from "body-parser";
 
 import dotenv from "dotenv"
+import { LoginTicket } from "google-auth-library";
 dotenv.config();
 
 const app = express();
@@ -62,13 +63,29 @@ app.get('/profile', (req, res) => {
 app.post('/tokensignin', (req, res, next) => {
     tokenSignin(req,res);
 });
-/*
-app.post('/createRecaptchaAssessment', (req,res) => {
-    console.log("recaptcha token" + req.body.recaptchaAssessment);
-    //createAssessment(token=req.body.recaptchaAssessment);
+
+app.post('/createRecaptchaAssessment', async (req,res, next) => {
+
+    const token = req.body.recaptchaAssessment;
+    console.log("recaptcha token: " + token);
+
+
+   ///*
+   let scorePromise = await createAssessment({
+    projectID: "jlaude-labs-dev",
+    recaptchaKey: "6Lcgk2MpAAAAAMxdw1R_ys0iw_dTd3NOL_lDwyCY",
+    token: token,
+    recaptchaAction: "login",
+
+  });
+
+  scorePromise.then(function (val) {
+    console.log(val);
+  });
+
+  //*/
     
-}); 
-*/
+});
 
 // Start server
 app.listen(port, () => {

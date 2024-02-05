@@ -17,10 +17,10 @@
       grecaptcha.enterprise.ready(async () => {
         const token = await grecaptcha.enterprise.execute('6Lcgk2MpAAAAAMxdw1R_ys0iw_dTd3NOL_lDwyCY', {action: 'LOGIN'});
         console.log("recaptcha token: " + token);
-       // var xhr = new XMLHttpRequest();
-       // xhr.open('POST', '/createRecaptchaAssessment');
-       // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-       // xhr.send('recaptchaAssessment=' + token);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/createRecaptchaAssessment');
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send('recaptchaAssessment=' + token);
       });
 
 
@@ -40,7 +40,7 @@
         <a href="/login">Login with Email</a>
       </li>
       <li>
-        <!-- <a href="javascript:recaptchaFunc();">Register with Email</a> -->
+        <a href="javascript:recaptchaFunc();">Register with Email</a>
 
       </li>
     </ul>
