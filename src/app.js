@@ -7,6 +7,7 @@ import {tokenSignin} from "./tokensignin.js";
 import {emailLogin, emailRegister} from "./email_login.js";
 import pkg from 'compression';
 import {createAssessment} from "./createRecaptchaAssessment.js";
+import { evaluateScore } from "./evaluateRecaptchaScore.js";
 const compression = pkg;
 
 import express from "express";
@@ -64,28 +65,33 @@ app.post('/tokensignin', (req, res, next) => {
     tokenSignin(req,res);
 });
 
-app.post('/createRecaptchaAssessment', async (req,res, next) => {
+// Block malicious traffic
+app.get('/blocked', (req, res) => {
+  res.setHeader("Content-Type", "text/html")
+  res.render('blocked');
+});
+
+app.post('/createRecaptchaAssessment', async (req,res) => {
 
     const token = req.body.recaptchaAssessment;
     console.log("recaptcha token: " + token);
 
-
-   ///*
-   let scorePromise = await createAssessment({
+  let score = await createAssessment({
     projectID: "jlaude-labs-dev",
     recaptchaKey: "6Lcgk2MpAAAAAMxdw1R_ys0iw_dTd3NOL_lDwyCY",
     token: token,
-    recaptchaAction: "login",
+    recaptchaAction: "LOGIN",
 
   });
 
-  scorePromise.then(function (val) {
-    console.log(val);
-  });
+  console.log("Score: " + score);
 
-  //*/
+  res.send({score: score});
+
+  //evaluateScore(req, res, score);
     
 });
+
 
 // Start server
 app.listen(port, () => {
