@@ -15,12 +15,12 @@
   function recaptchaFunc() {
     console.log("onclick function");
       grecaptcha.enterprise.ready(async () => {
-        const token = await grecaptcha.enterprise.execute('6Lcgk2MpAAAAAMxdw1R_ys0iw_dTd3NOL_lDwyCY', {action: 'LOGIN'});
+        const token = await grecaptcha.enterprise.execute('6Lcgk2MpAAAAAMxdw1R_ys0iw_dTd3NOL_lDwyCY', {action: 'REGISTER'});
         console.log("recaptcha token: " + token);
         var xhr = new XMLHttpRequest();
         xhr.open('POST', '/createRecaptchaAssessment');
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.send('recaptchaAssessment=' + token);
+        xhr.send('recaptchaAssessment=' + token + "&action=REGISTER");
         xhr.responseType ="json";
 
         xhr.onreadystatechange = function() {

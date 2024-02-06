@@ -74,13 +74,15 @@ app.get('/blocked', (req, res) => {
 app.post('/createRecaptchaAssessment', async (req,res) => {
 
     const token = req.body.recaptchaAssessment;
+    const action = req.body.action;
     console.log("recaptcha token: " + token);
+    console.log("action: " + action);
 
   let score = await createAssessment({
     projectID: "jlaude-labs-dev",
     recaptchaKey: "6Lcgk2MpAAAAAMxdw1R_ys0iw_dTd3NOL_lDwyCY",
     token: token,
-    recaptchaAction: "LOGIN",
+    recaptchaAction: action,
 
   });
 
