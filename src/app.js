@@ -7,7 +7,6 @@ import {tokenSignin} from "./tokensignin.js";
 import {emailLogin, emailRegister} from "./email_login.js";
 import pkg from 'compression';
 import {createAssessment} from "./createRecaptchaAssessment.js";
-import { evaluateScore } from "./evaluateRecaptchaScore.js";
 const compression = pkg;
 
 import express from "express";
@@ -90,8 +89,6 @@ app.post('/createRecaptchaAssessment', async (req,res) => {
 
   res.send({score: score});
 
-  //evaluateScore(req, res, score);
-    
 });
 
 
