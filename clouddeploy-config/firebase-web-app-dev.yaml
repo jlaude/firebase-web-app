@@ -3,9 +3,11 @@ kind: Service
 metadata:
   name: firebase-web-app-dev
   annotations:
-    autoscaling.knative.dev/minScale: '1'
+    run.googleapis.com/launch-stage: BETA
+    run.googleapis.com/minScale: '1'
 spec:
   template:
+
     spec:
       containers:
       - image: firebase-web-app
